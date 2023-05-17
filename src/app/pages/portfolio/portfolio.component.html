@@ -1,0 +1,69 @@
+<section id="portfolio" class="portfolio section">
+
+    <!-- Section Title -->
+    <div class="container section-title">
+      <h2>Tecnhical Portfolio</h2>
+      <p>Welcome to my technical portfolio, where I share knowledge, experiences, and best practices in software development. Here, you’ll find articles on backend architecture, API optimization, cloud computing, and the latest trends in technology. My goal is to provide valuable insights and practical solutions to help developers and tech enthusiasts grow.</p>
+      <p>🚀 Stay tuned for new articles and deep dives into cutting-edge technologies!</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="isotope-layout">
+
+        <div class="portfolio-filters row">
+          <div class="col-12 pb-3 text-center">
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              @for(tag of tags; track tag) {
+                <button type="button" class="btn btn-outline-primary" [class.active]="tag === selectedTag" (click)="selectTag(tag)">{{tag}}</button>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="row gy-4 isotope-container">
+
+          @if( _portfolios == null || _portfolios == [] || _portfolios.length === 0 ){
+            <div class="alert alert-dark" role="alert">
+              No portfolio found!
+            </div>
+          }
+
+          @for( portfolio of _portfolios; track portfolio.name) {
+            <div class="col-lg-4 col-md-6 portfolio-item">
+              <div class="card">
+                <img [src]="portfolio.image" class="card-img-top" [alt]="portfolio.name">
+                <div class="card-body">
+
+
+                  @if( portfolio.languages != null ){
+                    <p class="languages">
+                    @for( lang of portfolio.languages; track lang) {
+                      <span class="badge bg-language">{{lang}}</span>
+                    }
+                    </p>
+                  }
+
+                  <h5 class="card-title">{{portfolio.name}}</h5>
+                  <p class="card-text">
+                    <span class="flag-icon flag-icon-es"></span>
+                  </p>
+                  <!-- <p class="card-text">{{portfolio.description}}</p> -->
+                  @if( portfolio.link != null ){
+                    <a [href]="portfolio.link" target="_blank" class="btn btn-outline-primary btn-sm w-100">
+                      <i class="fa-brands fa-linkedin"></i>
+                      More Details
+                    </a>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>

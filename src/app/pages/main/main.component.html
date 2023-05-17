@@ -1,0 +1,21 @@
+<section id="main" class="main section light-background">
+
+  <img src="assets/img/main-bg.png" alt="">
+
+  <div class="container" data-aos="zoom-out">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <h2>{{title}}</h2>
+        <p i18n>I'm <span class="typed">{{description}}</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+        <div class="social-links">
+          @for( social of _socials; track social.name) {
+            <a href="{{social.url}}" target="_blank">
+              <i class="{{social.icon}}"></i>
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

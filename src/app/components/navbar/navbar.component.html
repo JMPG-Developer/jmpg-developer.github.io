@@ -1,0 +1,17 @@
+<nav class="navmenu">
+  <ul id="navmenu">
+    <li>
+      <a href="#main">
+        <i class="fas fa-house"></i>
+        <span>Home</span>
+      </a>
+    </li>
+
+    <li *ngFor="let item of menu | keyvalue | pageOrder">
+      <a href="#{{ item.key }}">
+        <i [class]="item.value.icon"></i>
+        <span>{{ item.value.name }}</span>
+      </a>
+    </li>
+  </ul>
+</nav>

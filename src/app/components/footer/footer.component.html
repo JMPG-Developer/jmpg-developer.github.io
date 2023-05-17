@@ -1,0 +1,23 @@
+<footer id="footer" class="footer position-relative light-background">
+    <div class="container">
+      <h3 class="sitename">{{title}}</h3>
+      <p>Audentes Fortuna Iuvat</p>
+
+      @if( _socials.length !== 0 ){
+      <div class="social-links d-flex justify-content-center">
+        @for( social of _socials; track social.name) {
+          <a href="{{social.url}}" target="_blank">
+            <i class="{{social.icon}}"></i>
+          </a>
+        }
+      </div>
+      }
+
+      <div class="container">
+        <div class="copyright">
+          <strong class="px-1 sitename">&copy; {{title}}</strong>- <span>All Rights Reserved</span>
+          <p>Powered by Github Pages</p>
+        </div>
+      </div>
+    </div>
+  </footer>

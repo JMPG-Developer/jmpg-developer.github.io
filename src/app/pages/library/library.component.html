@@ -1,0 +1,82 @@
+<section id="library" class="library section">
+
+    <div class="container section-title">
+      <h2>Library</h2>
+      <p i18n>Here you can find a list of books that I have read and recommend.</p>
+      <p i18n>These books cover a wide range of topics, including software development, architecture, and best practices. Each book has been carefully selected for its value in enhancing knowledge and skills in the tech industry.</p>
+      <p i18n>Feel free to explore the list and discover new insights that can help you in your professional journey.</p>
+    </div>
+
+    <div class="container">
+      <div class="row gy-4">
+        @for (book of this.books.list; track book.id) {
+          <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <div class="book-item flex-fill d-flex flex-column h-100">
+              <div class="book-image">
+                <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="selected(book)">
+                  <img [src]="book.image" class="w-100" alt="{{book.name}}" />
+                </a>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+  </section>
+
+<div class="modal modal-xl book-modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-4">
+            <img [src]="selectedBook?.image" class="img-fluid" alt="{{selectedBook?.name}}" />
+          </div>
+          <div class="col-lg-8">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3>{{ selectedBook?.name }}</h3>
+            @if( selectedBook?.tags ){
+            <p class="authors">
+              @for( author of selectedBook?.authors; track author ){
+                <span class="badge bg-dark">{{ author }}</span>
+              }
+            </p>
+            }
+
+            <p>{{ selectedBook?.description }}</p>
+
+
+            @if( selectedBook?.notes ){
+              <p class="mb-1">
+                <b>Level:</b>
+                {{ selectedBook?.notes?.level }}
+              </p>
+              
+              <p class="mb-1">
+                <b>When to Read:</b>
+                {{ selectedBook?.notes?.whenToRead }}
+              </p>
+
+              <p>
+                <b>Highlights: </b>
+              </p>
+              <ul class="mb-2 ps-3">
+                @for (highlight of selectedBook?.notes?.highlights; track highlight) {
+                <li>{{ highlight }}</li>
+                }
+              </ul>
+            }
+
+            <p class="link">
+              <a class="btn btn-warning w-100" [href]="selectedBook?.link" target="_blank">
+                <i class="fa-brands fa-amazon"></i>
+                Buy Now On Amazon
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+.skills{
+
+  .pagination {
+
+    .page-link{
+      cursor: pointer;
+      border: none;
+      color: var(--accent-color);
+      opacity: 0.5;
+    }
+
+    .page-link.active{
+      color: var(--accent-color);
+      background-color: transparent;
+      opacity: 1;
+    }
+
+  }
+
+  .skills-filter{
+
+    .btn-outline-primary{
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+      background-color: var(--contrast-color);
+    }
+
+    .btn-outline-primary.active,
+    .btn-outline-primary:active,
+    .btn-outline-primary:hover{
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+    }
+
+
+    .dropdown-item.active,
+    .dropdown-item:active,
+    .dropdown-item:hover{
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+    }
+  }
+
+  .skills-content{
+
+    .alert-outline-primary{
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+      background-color: var(--contrast-color);
+    }
+
+    .card{
+      border-color: var(--accent-color);
+      min-height:250px;
+
+      .card-title{
+        font-weight: bold;
+      }
+
+      .skill-icon{
+        font-size: 10rem;
+        color: var(--accent-color);
+      }
+
+      .tags .badge{
+        margin-right: 5px;
+      }
+
+      .proficiency i{
+        color: var(--accent-color);
+        margin-left:1px;
+      }
+
+      .proficiency i.fa-circle-half-stroke{
+        rotate: 90deg;
+      }
+    }
+
+  }
+
+}

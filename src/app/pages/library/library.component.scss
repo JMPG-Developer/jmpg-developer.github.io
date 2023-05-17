@@ -1,0 +1,69 @@
+.library{
+  padding: 60px 0;
+}
+
+.book-item
+{
+  &:hover{
+    cursor: pointer;
+  }
+
+  .book-image{
+
+    &:hover{
+      img{
+        transform: scale(1.2);
+      }
+    }
+    
+  }
+}
+
+.book-content{
+  display: none !important;
+}
+
+/*
+ * Book Modal
+ */
+.book-modal
+{
+  .modal-body{
+    .btn-close{
+      position:absolute;
+      right:15px;
+      top:15px;
+    }
+
+    // .authors{
+    //   padding-bottom: 10px;
+    //   border-bottom: 1px solid #cecece;
+    // }
+
+    h4{
+      font-size: 1.2rem;
+    }
+  }
+
+  .modal-content{
+
+    .authors > span.badge {
+      margin-right: 5px;
+      font-size: 0.8rem;
+    }
+
+    .tags{
+      text-align: right;
+
+      span.badge {
+        margin-right: 5px;
+        font-size: 0.8rem;
+      }
+    }
+
+    .link{
+      padding-top: 15px;
+    }
+  }
+}
+
