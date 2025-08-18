@@ -10,82 +10,97 @@
 
       <div class="row">
 
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="resume-title" >
+            <i class="fa-solid fa-building"></i>
+            Professional Experience
+            @if( isMobile){
+            <i class="fa fa-bars float-end" (click)="toggleExperiences()"></i>
+            }
+          </h3>
+
+          @if( showExperiences ){
+            @for( experience of experiences.list; track experience ){
+            <div class="resume-item">
+              <h4>{{experience.title}}</h4>
+              <h5>
+                @if( experience.end == null ){
+                  <span>{{experience.start}}</span>
+                } @else {
+                  <span>{{experience.start}} - {{experience.end}}</span>
+                }
+                <em>{{experience.location}}</em>
+              </h5>
+
+              @if( experience.descriptions.length > 1 ){
+              <ul>
+              @for( description of experience.descriptions; track description ){
+                <li>{{description}}</li>
+              }
+              </ul>
+              }
+            </div>
+            }
+          }
+
+        </div>
+
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
           <h3 class="resume-title">
             <i class="fa-solid fa-star"></i>
             Certifications
+            @if( isMobile){
+            <i class="fa fa-bars float-end" (click)="toggleCertifications()"></i>
+            }
           </h3>
 
-          @for( certification of certifications.list; track certification ){
-          <div class="resume-item">
-            <h4>{{certification.title}}</h4>
-            <h5>
-              @if( certification.end == null ){
-                <span>{{certification.start}}</span>
-              } @else {
-                <span>{{certification.start}} - {{certification.end}}</span>
+          @if( showCertifications ){
+            @for( certification of certifications.list; track certification ){
+            <div class="resume-item">
+              <h4>{{certification.title}}</h4>
+              <h5>
+                @if( certification.end == null ){
+                  <span>{{certification.start}}</span>
+                } @else {
+                  <span>{{certification.start}} - {{certification.end}}</span>
+                }
+                <em>{{certification.location}}</em>
+              </h5>
+              @for( description of certification.descriptions; track description ){
+              <p>{{description}}</p>
               }
-              <em>{{certification.location}}</em>
-            </h5>
-            @for( description of certification.descriptions; track description ){
-            <p>{{description}}</p>
+            </div>
             }
-          </div>
           }
           
           <h3 class="resume-title">
             <i class="fa-solid fa-graduation-cap"></i>
             Education
+            @if( isMobile){
+            <i class="fa fa-bars float-end" (click)="toggleEducations()"></i>
+            }
           </h3>
 
-          @for( education of educations.list; track education ){
-          <div class="resume-item">
-            <h4>{{education.title}}</h4>
-            <h5>
-              @if( education.end == null ){
-                <span>{{education.start}}</span>
-              } @else {
-                <span>{{education.start}} - {{education.end}}</span>
-              }
-              <em>{{education.location}}</em>
-            </h5>
+          @if( showEducations ){
+            @for( education of educations.list; track education ){
+            <div class="resume-item">
+              <h4>{{education.title}}</h4>
+              <h5>
+                @if( education.end == null ){
+                  <span>{{education.start}}</span>
+                } @else {
+                  <span>{{education.start}} - {{education.end}}</span>
+                }
+                <em>{{education.location}}</em>
+              </h5>
 
-            @for( description of education.descriptions; track description ){
-            <p>{{description}}</p>
+              @for( description of education.descriptions; track description ){
+              <p>{{description}}</p>
+              }
+            </div>
             }
-          </div>
           }
           
-        </div>
-
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="resume-title">
-            <i class="fa-solid fa-building"></i>
-            Professional Experience
-          </h3>
-
-          @for( experience of experiences.list; track experience ){
-          <div class="resume-item">
-            <h4>{{experience.title}}</h4>
-            <h5>
-              @if( experience.end == null ){
-                <span>{{experience.start}}</span>
-              } @else {
-                <span>{{experience.start}} - {{experience.end}}</span>
-              }
-              <em>{{experience.location}}</em>
-            </h5>
-
-            @if( experience.descriptions.length > 1 ){
-            <ul>
-            @for( description of experience.descriptions; track description ){
-              <li>{{description}}</li>
-            }
-            </ul>
-            }
-          </div>
-          }
-
         </div>
 
       </div>

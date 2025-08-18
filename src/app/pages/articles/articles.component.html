@@ -1,0 +1,94 @@
+<section id="articles" class="articles section">
+
+    <!-- Section Title -->
+    <div class="container section-title">
+      <h2>Technical Articles</h2>
+      <p>Welcome to my technical articles section, where I share knowledge, experiences, and best practices in software development. Here, you’ll find articles on backend architecture, API optimization, cloud computing, and the latest trends in technology. My goal is to provide valuable insights and practical solutions to help developers and tech enthusiasts grow.</p>
+      <p>🚀 Stay tuned for new articles and deep dives into cutting-edge technologies!</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="isotope-layout">
+
+        @if( showTags ){
+        <div class="articles-filters row">
+          <div class="col-12 pb-3 text-center">
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              @for(tag of tags; track tag) {
+                <button type="button" class="btn btn-outline-primary" [class.active]="tag === selectedTag" (click)="selectTag(tag)">{{tag}}</button>
+              }
+            </div>
+          </div>
+        </div>
+        }
+
+        <div class="row gy-4 isotope-container">
+
+          @if( _articles == null || _articles == [] || _articles.length === 0 ){
+            <div class="alert alert-dark" role="alert">
+              No articles found!
+            </div>
+          }
+
+          @for( article of _articles; track article.name) {
+            <div class="col-lg-4 col-md-6 articles-item">
+              <div class="card">
+                <div class="card-img">
+                  <!-- Languages -->
+                  @if( article.languages != null ){
+                    <p class="languages">
+                    @for( lang of article.languages; track lang) {
+                      <span class="badge bg-language">{{lang}}</span>
+                    }
+                    </p>
+                  }
+
+                  <!-- Tags -->
+                  @if( article.tags != null ){
+                    <p class="tags">
+                    @for( tag of article.tags; track tag) {
+                      <span class="badge bg-tag">{{tag}}</span>
+                    }
+                    </p>
+                  }
+
+                  <img [src]="article.image" class="card-img-top" [alt]="article.name">
+                </div>
+                <div class="card-body">
+                  <a [routerLink]="['/articles', article.alias]">
+                    <h5 class="card-title">
+                      {{article.name}}
+                    </h5>
+                  </a>
+                  <p class="card-text">
+                    <span class="flag-icon flag-icon-es"></span>
+                  </p>
+                  <p class="card-text">{{article.resume}}</p>
+
+                  <!-- @if( article.link != null ){
+                    <a [routerLink]="['/articles', article.alias]" class="btn btn-outline-primary btn-sm w-100">
+                      <i class="fa-brands fa-linkedin"></i>
+                      More Details
+                    </a>
+                  } -->
+                </div>
+              </div>
+            </div>
+          }
+
+          @if( showMoreButton ){ 
+          <div class="col-12 text-center mt-4">
+            <button [routerLink]="['/articles']" class="btn btn-secondary btn-sm w-100">
+              Show More
+            </button>
+          </div>
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>

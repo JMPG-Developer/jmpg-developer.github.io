@@ -5,6 +5,10 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
+  .resume .resume-title i.fa-bars {
+    display: none;
+    cursor: pointer;
+  }
   
   .resume .resume-item {
     padding: 0 0 20px 20px;
@@ -62,4 +66,26 @@
     top: 0;
     background: var(--background-color);
     border: 2px solid var(--accent-color);
+  }
+
+  @media (max-width: 768px) {
+    .resume {
+      .resume-title {
+        float: left;
+        width: 100%;
+
+        i.fa-bars {
+          display:inline-block
+        }
+      }
+
+      .resume-item {
+        float: left;
+        width: 100%;
+
+        h4{
+          font-size: 14px;
+        }
+      }
+    }
   }

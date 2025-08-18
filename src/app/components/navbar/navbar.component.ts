@@ -12,7 +12,9 @@ import { PageOrderPipe } from '../../pipes/page-order.pipe';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  @Input() back: string | null = null;
   @Input() components: Pages | null = null;
+
   menu: Map<string, Page>;
 
   constructor() {

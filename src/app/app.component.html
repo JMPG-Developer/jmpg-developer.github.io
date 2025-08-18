@@ -1,20 +1,7 @@
-<header id="header" class="header d-flex flex-column justify-content-center">
-  <!-- <i class="header-toggle d-xl-none bi bi-list"></i> -->
-  
-  <app-navbar [title]="title" [components]="components"></app-navbar>
-</header>
+<app-header></app-header>
 
 <main data-bs-spy="scroll" data-bs-target="#navmenu" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-  <app-main [title]="title" [socials]="socials"></app-main>
-
-  <app-about *ngIf="components.about.enabled"></app-about>
-  <app-stats *ngIf="components.stats.enabled"></app-stats>
-  <app-resume *ngIf="components.resume.enabled"></app-resume>
-  <app-portfolio *ngIf="components.portfolio.enabled"></app-portfolio>
-  <app-skills *ngIf="components.skills.enabled"></app-skills>
-  <app-library *ngIf="components.library.enabled"></app-library>
-  <app-testimonials *ngIf="components.testimonials.enabled"></app-testimonials>
-  <app-contact *ngIf="components.contact.enabled"></app-contact>
+  <router-outlet />
 </main>
 
 <app-footer [title]="title" [socials]="socials"></app-footer>
