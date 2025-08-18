@@ -1,5 +1,14 @@
 <nav class="navmenu">
   <ul id="navmenu">
+    @if(back != null && back !== '') {
+    <li>
+      <a [href]="back">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back ({{ back }})</span>
+      </a>
+    </li>
+    }
+
     <li>
       <a href="#main">
         <i class="fas fa-house"></i>
@@ -8,10 +17,12 @@
     </li>
 
     <li *ngFor="let item of menu | keyvalue | pageOrder">
+      @if(item.value.menu) {
       <a href="#{{ item.key }}">
         <i [class]="item.value.icon"></i>
         <span>{{ item.value.name }}</span>
       </a>
+      }
     </li>
   </ul>
 </nav>

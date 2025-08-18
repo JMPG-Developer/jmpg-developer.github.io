@@ -1,0 +1,41 @@
+<app-main [title]="title" [socials]="socials"></app-main>
+
+@if(components.about.enabled) {
+  <app-about></app-about>
+}
+
+@if(components.stats.enabled) {
+  <app-stats></app-stats>
+}
+
+@if(components.resume.enabled) {
+  <app-resume [isMobile]="isMobile"></app-resume>
+}
+
+@if(components.articles.enabled) {
+  <app-articles></app-articles>
+}
+
+@if(components.portfolio.enabled) {
+  <app-portfolio></app-portfolio>
+}
+
+@if(components.skills.enabled) {
+  <app-skills [isMobile]="isMobile"></app-skills>
+}
+
+@if(components.library.enabled) {
+  <app-library></app-library>
+}
+
+@if(components.services.enabled) {
+  <app-services></app-services>
+}
+
+@if(components.testimonials.enabled) {
+  <app-testimonials></app-testimonials>
+}
+
+@if(components.contact.enabled) {
+  <app-contact></app-contact>
+}
