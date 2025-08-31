@@ -1,0 +1,103 @@
+name: Release (auto version)
+
+on:
+  push:
+    branches: [ "main" ]
+    # Opcional: evita releases por cambios irrelevantes
+    paths:
+      - "src/**"
+      - "projects/**"
+      - "package.json"
+      - "package-lock.json"
+      - "angular.json"
+      - ".github/workflows/**"
+
+permissions:
+  contents: write   # necesario para push y crear tags/releases
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: release-${{ github.ref_name }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # necesitamos los tags
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      # (Opcional) valida que build sigue funcionando antes de versionar
+      - name: Build (prod)
+        run: npm run build --if-present -- --configuration production
+
+      - name: Determine bump type (conventional commits)
+        id: bump
+        shell: bash
+        run: |
+          set -e
+          last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "last_tag=$last_tag"
+          # Commits desde la última etiqueta (exclusiva) hasta HEAD
+          commits=$(git log --format=%s%b ${last_tag}..HEAD || true)
+
+          # Valor por defecto
+          bump="patch"
+
+          # Si no hay commits (p.ej. rerun) salimos sin hacer nada
+          if [ -z "$commits" ]; then
+            echo "No hay commits desde $last_tag. Nada que versionar."
+            echo "bump=none" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Reglas simples estilo conventional commits
+          if echo "$commits" | grep -E "BREAKING CHANGE|!: " -qi; then
+            bump="major"
+          elif echo "$commits" | grep -E "^feat(\(|!:|:)" -qi; then
+            bump="minor"
+          else
+            bump="patch" # si hay fix/chore/docs/test/etc → patch
+          fi
+
+          echo "bump=$bump" >> $GITHUB_OUTPUT
+          echo "Bump elegido: $bump"
+
+      - name: Configure Git
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump package.json + tag
+        id: version
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          # npm version actualiza package.json y package-lock.json,
+          # crea un commit y un tag (vX.Y.Z)
+          new_version=$(npm version ${{ steps.bump.outputs.bump }} -m "chore(release): %s [skip ci]")
+          echo "version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Push commit + tags
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          # Empuja a la misma rama que disparó el workflow
+          git push origin HEAD:${{ github.ref_name }} --follow-tags
+
+      - name: Create GitHub Release
+        if: steps.bump.outputs.bump != 'none'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
+          body: "Automated release ${{ steps.version.outputs.version }}."
