@@ -27,7 +27,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            jmpgdeveloper/portal
+            ${{ vars.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
             type=ref,event=tag
